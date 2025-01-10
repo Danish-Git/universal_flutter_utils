@@ -6,7 +6,7 @@ import 'package:universal_flutter_utils/widgets/bottom_sheet/index.dart';
 
 Future<UFUSingleSelectModel?> UFUSingleSelect ({List<UFUSingleSelectModel>? dataList}) async {
   return await Get.bottomSheet(
-    UFUBottomSheet(childBuilder: (controller) => SingleSelectView(
+    UFUBottomSheetView(childBuilder: (controller) => SingleSelectView(
       bottomSheetController: controller,
       dataList: dataList,
     )),

@@ -4,8 +4,17 @@ import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 import 'controller.dart';
 
-class UFUBottomSheet extends StatelessWidget {
-  const UFUBottomSheet({
+Future<UFUSingleSelectModel?> UFUBottomSheet ({required Widget Function(UFUBottomSheetController controller) childBuilder}) async {
+  return await Get.bottomSheet(
+    UFUBottomSheetView(childBuilder: childBuilder),
+    backgroundColor: AppTheme.themeColor.backgroundColor,
+    ignoreSafeArea: true,
+    isScrollControlled: true,
+  );
+}
+
+class UFUBottomSheetView extends StatelessWidget {
+  const UFUBottomSheetView({
     super.key,
     this.title,
     required this.childBuilder,
