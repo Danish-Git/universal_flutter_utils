@@ -10,6 +10,7 @@ class UFUThemeColor {
   Color borderColor;
   Color disabledColor;
   Color dimGrayColor;
+  Color transparent;
 
   // Constructor
   UFUThemeColor({
@@ -22,5 +23,6 @@ class UFUThemeColor {
     this.borderColor = Colors.blue, // Default border color for outline buttons
     this.disabledColor = Colors.grey, // Default disable color for buttons
     this.dimGrayColor = const Color(0xFFEDEDED), // Default background color for toast
+    this.transparent = Colors.transparent, // Default transparent color for background
   }) : appBarColor = appBarColor ?? primaryColor; // Set appBarColor to primaryColor by default
 }
