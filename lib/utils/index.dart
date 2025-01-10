@@ -2,6 +2,7 @@ import 'package:universal_flutter_utils/utils/app_config/index.dart';
 
 import 'date_time/index.dart';
 import 'form_validator/index.dart';
+import 'permissions/index.dart';
 
 class UFUtils {
   static String appName = UFUAppConfig.appName;
@@ -22,5 +23,7 @@ class UFUtils {
   static DateTime? parseTime(String timeString, {String format = 'hh:mm a'}) => DateTimeUtils.parseTime(timeString, format: format);
   static DateTime? parseCompleteDateTime(String completeDateTimeString, {String format = 'yyyy-MM-dd hh:mm a'}) => DateTimeUtils.parseCompleteDateTime(completeDateTimeString, format: format);
 
+  ///   Permission Handling
+  static UFPermissionUtils permissionUtils = UFPermissionUtils();
 
 }
