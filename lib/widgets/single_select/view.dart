@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jp_mobile_flutter_ui/AnimatedSpinKit/fading_circle.dart';
-import 'package:jp_mobile_flutter_ui/jp_mobile_flutter_ui.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-class JPSingleSelectView extends StatelessWidget {
-  const JPSingleSelectView({
+class UFUSingleSelectView extends StatelessWidget {
+  const UFUSingleSelectView({
     required this.list,
     required this.mainList,
     this.selectedItemId,
@@ -28,7 +27,7 @@ class JPSingleSelectView extends StatelessWidget {
     this.prefixButtonText,
     this.onTapSuffixBtn,
     this.onTapPrefixBtn,
-    this.type = JPSingleSelectType.local,
+    this.type = UFUSingleSelectType.local,
     this.isLoading = false,
     this.isLoadMore = false,
     this.listLoader,
@@ -37,12 +36,12 @@ class JPSingleSelectView extends StatelessWidget {
     this.showIncludeInactiveButton = false,
     this.includeInactive = false,
     this.onTapIncludeInactiveButton,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
-  final List<JPSingleSelectModel> list;
+  final List<UFUSingleSelectModel> list;
 
-  final List<JPSingleSelectModel> mainList;
+  final List<UFUSingleSelectModel> mainList;
 
   //Selected item id from the list
   final String? selectedItemId;
@@ -85,8 +84,8 @@ class JPSingleSelectView extends StatelessWidget {
   final VoidCallback? onTapIncludeInactiveButton;
 
   /// type can be used to differentiate between network list and local list
-  /// default selected type is [JPSingleSelectType.local]
-  final JPSingleSelectType type;
+  /// default selected type is [UFUSingleSelectType.local]
+  final UFUSingleSelectType type;
 
   /// In case of network list isLoading helps to manage loading state
   final bool isLoading;
@@ -127,23 +126,23 @@ class JPSingleSelectView extends StatelessWidget {
       bottom: isFilterSheet,
       child: AnimatedPadding(
           duration: const Duration(milliseconds: 100),
-          padding: JPResponsiveDesign.popOverBottomInsets,
+          padding: UFUResponsiveDesign.popOverBottomInsets,
           child: Padding(
             padding: EdgeInsets.only(left: 10, right: 10,
-              bottom: isFilterSheet && !JPScreen.hasBottomPadding ? 20 : 0),
+              bottom: isFilterSheet && !UFUScreen.hasBottomPadding ? 20 : 0),
             child: ClipRRect(
               borderRadius: getBorderRadius(),
               child: Material(
                 borderRadius: getBorderRadius(),
-                color: JPAppTheme.themeColors.base,
+                color: AppTheme.themeColors.base,
                 child: SafeArea(
                   top: false,
                   bottom: !isFilterSheet,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      JPSingleSelectHeader(
-                        canShowSearchBar: canShowSearchBar ?? ((type == JPSingleSelectType.network || !isFilterSheet) && mainList.length > 10),
+                      UFUSingleSelectHeader(
+                        canShowSearchBar: canShowSearchBar ?? ((type == UFUSingleSelectType.network || !isFilterSheet) && mainList.length > 10),
                         title: title!,
                         inputHintText: inputHintText,
                         searchInputCtrl: searchInputCtrl,
@@ -169,7 +168,7 @@ class JPSingleSelectView extends StatelessWidget {
                                   height: getMaxHeight(),
                                   child: Center(
                                       child: FadingCircle(
-                                    color: JPAppTheme.themeColors.primary,
+                                    color: AppTheme.themeColors.primary,
                                     size: 30,
                                   ))),
                             AnimatedContainer(
@@ -177,7 +176,7 @@ class JPSingleSelectView extends StatelessWidget {
                               constraints: BoxConstraints(maxHeight: getMaxHeight()),
                               child: Opacity(
                                 opacity: isVisible! ? 1 : 0,
-                                child: JPSingleSelectList(
+                                child: UFUSingleSelectList(
                                   scrollController: scrollController!,
                                   list: list,
                                   selectedItemId: selectedItemId,
@@ -203,10 +202,10 @@ class JPSingleSelectView extends StatelessWidget {
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 15),
-                                  child: JPButton(
+                                  child: UFUButton(
                                     text: prefixButtonText?.toUpperCase(),
-                                    colorType: JPButtonColorType.lightGray,
-                                    size: JPButtonSize.small,
+                                    colorType: UFUButtonColorType.lightGray,
+                                    size: UFUButtonSize.small,
                                     onPressed: onTapPrefixBtn,
                                   ),
                                 ),
@@ -218,10 +217,10 @@ class JPSingleSelectView extends StatelessWidget {
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 15),
-                                  child: JPButton(
+                                  child: UFUButton(
                                     text: suffixButtonText?.toUpperCase(),
-                                    colorType: JPButtonColorType.tertiary,
-                                    size: JPButtonSize.small,
+                                    colorType: UFUButtonColorType.tertiary,
+                                    size: UFUButtonSize.small,
                                     onPressed: onTapSuffixBtn,
                                   ),
                                 ),
@@ -244,7 +243,7 @@ class JPSingleSelectView extends StatelessWidget {
     if(isFilterSheet) {
       return BorderRadius.circular(20);
     } else {
-      return JPResponsiveDesign.bottomSheetRadius;
+      return UFUResponsiveDesign.bottomSheetRadius;
     }
   }
 

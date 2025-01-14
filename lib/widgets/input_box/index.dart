@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jp_mobile_flutter_ui/CommonFiles/text_helper.dart';
-import 'package:jp_mobile_flutter_ui/InputBox/clear_icon.dart';
-import 'package:jp_mobile_flutter_ui/jp_mobile_flutter_ui.dart';
-import '../InputBox/debounce.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-class JPInputBox extends StatefulWidget {
-  const JPInputBox({
+class UFUInputBox extends StatefulWidget {
+  const UFUInputBox({
       this.label,
       this.controller,
       this.keyboardType,
@@ -26,7 +23,7 @@ class JPInputBox extends StatefulWidget {
       this.onPressed,
       this.debounceTime,
       this.autoGrow = false,
-      this.type = JPInputBoxType.withoutLabel,
+      this.type = UFUInputBoxType.withoutLabel,
       this.fillColor,
       this.labelBgColor,
       this.cursorWidth = 1.5,
@@ -39,7 +36,7 @@ class JPInputBox extends StatefulWidget {
       this.cancelButtonColor,
       this.cancelButtonSize,
       this.padding,
-      this.textSize = JPTextSize.heading4,
+      this.textSize = UFUTextSize.heading4,
       this.onTapSuffix,
       this.borderColor,
       this.isCounterText = false,
@@ -57,8 +54,7 @@ class JPInputBox extends StatefulWidget {
       this.textAlign = TextAlign.start,
       this.textAlignVertical = TextAlignVertical.top,
       this.textCapitalization = TextCapitalization.sentences,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   /// It is required to add label of a inputBox.
   final String? label;
@@ -120,12 +116,12 @@ class JPInputBox extends StatefulWidget {
 
   final bool autoGrow;
 
-  final JPInputBoxType type;
+  final UFUInputBoxType type;
 
   final bool? showCursor;
 
   /// filledColor can be used to give background color to text field
-  /// in case field is disabled default color will be [JPAppTheme.themeColors.dimGray]
+  /// in case field is disabled default color will be [AppTheme.themeColors.dimGray]
   final Color? fillColor;
 
   final Color? labelBgColor;
@@ -154,8 +150,8 @@ class JPInputBox extends StatefulWidget {
   /// padding is used to adjust text field padding
   final EdgeInsets? padding;
 
-  /// textSize is used to adjust textField text size, default value is [JPTextSize.heading4]
-  final JPTextSize textSize;
+  /// textSize is used to adjust textField text size, default value is [UFUTextSize.heading4]
+  final UFUTextSize textSize;
 
   /// onTapSuffix will handle tap on suffix icon
   final VoidCallback? onTapSuffix;
@@ -167,7 +163,7 @@ class JPInputBox extends StatefulWidget {
 
   final TextCapitalization textCapitalization;
 
-  final JPInputBoxController? inputBoxController;
+  final UFUInputBoxController? inputBoxController;
 
   final Widget Function(dynamic)? chip;
 
@@ -181,7 +177,7 @@ class JPInputBox extends StatefulWidget {
 
   final bool isExtWidget;
 
-  final JPInputBoxController? extInputBoxController;
+  final UFUInputBoxController? extInputBoxController;
 
   /// [prefixIconConstraints] can be used to give customised constraints to prefix icon
   final BoxConstraints? prefixIconConstraints;
@@ -193,10 +189,10 @@ class JPInputBox extends StatefulWidget {
   final TextAlignVertical? textAlignVertical;
 
   @override
-  _JPInputBoxState createState() => _JPInputBoxState();
+  _UFUInputBoxState createState() => _UFUInputBoxState();
 }
 
-class _JPInputBoxState extends State<JPInputBox> {
+class _UFUInputBoxState extends State<UFUInputBox> {
   FocusNode focusNode = FocusNode();
   bool showClearButton = false;
   String errorText = '';
@@ -204,18 +200,18 @@ class _JPInputBoxState extends State<JPInputBox> {
   double scale = 1;
   late Debounce debounce =
       Debounce(Duration(milliseconds: widget.debounceTime!));
-  late JPInputBoxController inputBoxController;
-  late JPInputBoxController extInputBoxController;
+  late UFUInputBoxController inputBoxController;
+  late UFUInputBoxController extInputBoxController;
 
   bool get showChips => widget.chip != null && widget.chipsList != null;
-  bool get isLabelOutside => widget.type == JPInputBoxType.withLabelOutside;
+  bool get isLabelOutside => widget.type == UFUInputBoxType.withLabelOutside;
 
   /// Default text style for label and hint text.
   TextStyle getStyle() {
     return TextStyle(
       fontFamily: 'Roboto',
-      package: 'jp_mobile_flutter_ui',
-      fontWeight: widget.type == JPInputBoxType.withoutLabel
+      package: 'UFU_mobile_flutter_ui',
+      fontWeight: widget.type == UFUInputBoxType.withoutLabel
           ? FontWeight.w500
           : FontWeight.w400,
       height: 1.2,
@@ -250,7 +246,7 @@ class _JPInputBoxState extends State<JPInputBox> {
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         child: widget.suffixChild ??
-            JPInputBoxClearIcon(
+            UFUInputBoxClearIcon(
               type: widget.type,
               cancelButtonColor: widget.cancelButtonColor,
               cancelButtonSize: widget.cancelButtonSize,
@@ -286,7 +282,7 @@ class _JPInputBoxState extends State<JPInputBox> {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   height: (widget.isRequired! ? 10 : 8) * scale,
-                  color: widget.labelBgColor ?? JPAppTheme.themeColors.base,
+                  color: widget.labelBgColor ?? AppTheme.themeColors.base,
                 ),
               ),
             ),
@@ -300,23 +296,23 @@ class _JPInputBoxState extends State<JPInputBox> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Flexible(
-                    child: JPText(
+                    child: UFUText(
                         text: getLabelText(),
                         maxLine: 1,
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.ellipsis,
                         height: 0,
-                        textSize: isLabelOutside ? JPTextSize.heading4 : JPTextSize.heading5,
+                        textSize: isLabelOutside ? UFUTextSize.heading4 : UFUTextSize.heading5,
                     ),
                   ),
                   if(widget.isRequired! && !isLabelOutside)
-                    JPText(
+                    UFUText(
                       text: ' *',
                       maxLine: 1,
                       textAlign: TextAlign.start,
-                      textColor: JPAppTheme.themeColors.red,
+                      textColor: AppTheme.themeColors.red,
                       overflow: TextOverflow.ellipsis,
-                      textSize: JPTextSize.heading4,
+                      textSize: UFUTextSize.heading4,
                     ),
                 ],
               ),
@@ -329,12 +325,12 @@ class _JPInputBoxState extends State<JPInputBox> {
   void initState() {
     super.initState();
 
-    inputBoxController = widget.inputBoxController ?? JPInputBoxController();
+    inputBoxController = widget.inputBoxController ?? UFUInputBoxController();
     inputBoxController.setParentController(widget.controller);
     inputBoxController.setParentFocusNode(widget.focusNode);
     inputBoxController.setValidator(validateField);
 
-    extInputBoxController = widget.extInputBoxController ?? JPInputBoxController();
+    extInputBoxController = widget.extInputBoxController ?? UFUInputBoxController();
     extInputBoxController.setParentController(widget.controller);
 
     if (inputBoxController.validateOnChange) {
@@ -357,7 +353,7 @@ class _JPInputBoxState extends State<JPInputBox> {
   }
 
   @override
-  void didUpdateWidget(covariant JPInputBox oldWidget) {
+  void didUpdateWidget(covariant UFUInputBox oldWidget) {
     if(widget.controller?.text != null
         && widget.controller?.text != inputBoxController.text
         && widget.inputBoxController == null) {
@@ -380,7 +376,7 @@ class _JPInputBoxState extends State<JPInputBox> {
       crossAxisAlignment: CrossAxisAlignment.start,
       key: inputBoxController.key,
       children: [
-        if (widget.type == JPInputBoxType.withLabelOutside) ...{
+        if (widget.type == UFUInputBoxType.withLabelOutside) ...{
           getLabel(),
           const SizedBox(height: 4),
           textFormField(),
@@ -400,15 +396,15 @@ class _JPInputBoxState extends State<JPInputBox> {
                 height: 5,
               )
             : const SizedBox.shrink(),
-        errorText.isEmpty || widget.type == JPInputBoxType.searchbar
+        errorText.isEmpty || widget.type == UFUInputBoxType.searchbar
             ? const SizedBox.shrink()
             : Align(
                 alignment: Alignment.topLeft,
-                child: JPText(
+                child: UFUText(
                   textAlign: TextAlign.start,
                   text: errorText,
-                  textSize: JPTextSize.heading5,
-                  textColor: JPAppTheme.themeColors.red,
+                  textSize: UFUTextSize.heading5,
+                  textColor: AppTheme.themeColors.red,
                 ),
               )
       ],
@@ -421,7 +417,7 @@ class _JPInputBoxState extends State<JPInputBox> {
         getBorderRadius(),
       ),
       color: widget.disabled
-          ? JPAppTheme.themeColors.inverse.withOpacity(0.6)
+          ? AppTheme.themeColors.inverse.withValues(alpha:0.6)
           : widget.fillColor,
       child: TextFormField(
         textCapitalization: widget.textCapitalization,
@@ -429,9 +425,9 @@ class _JPInputBoxState extends State<JPInputBox> {
         showCursor: widget.readOnly ? false : widget.showCursor ?? true,
         onChanged: (value) {
           if (widget.debounceTime != null &&
-              (widget.type == JPInputBoxType.searchbar ||
+              (widget.type == UFUInputBoxType.searchbar ||
                   widget.type ==
-                      JPInputBoxType.searchbarWithoutBorder)) {
+                      UFUInputBoxType.searchbarWithoutBorder)) {
             debounce(() {
               getOnChanged(value);
             });
@@ -452,9 +448,9 @@ class _JPInputBoxState extends State<JPInputBox> {
         obscureText: widget.obscureText,
         minLines: widget.autoGrow ? 1 : null,
         maxLines: widget.maxLines,
-        cursorColor: (widget.type == JPInputBoxType.searchbar || widget.type == JPInputBoxType.composeEmail)
-            ? JPAppTheme.themeColors.text
-            : JPAppTheme.themeColors.primary,
+        cursorColor: (widget.type == UFUInputBoxType.searchbar || widget.type == UFUInputBoxType.composeEmail)
+            ? AppTheme.themeColors.text
+            : AppTheme.themeColors.primary,
         maxLength: widget.maxLength,
         enabled: !widget.disabled,
         cursorHeight: widget.cursorHeight,
@@ -466,8 +462,8 @@ class _JPInputBoxState extends State<JPInputBox> {
         focusNode: inputBoxController.focusNode,
         autofocus: widget.autofocus,
         style: getStyle().copyWith(
-          color: widget.textColor ?? JPAppTheme.themeColors.text
-              .withOpacity(widget.disabled ? 0.4 : 1),
+          color: widget.textColor ?? AppTheme.themeColors.text
+              .withValues(alpha:widget.disabled ? 0.4 : 1),
           fontSize: TextHelper.getTextSize(widget.textSize),
         ),
         decoration: InputDecoration(
@@ -476,11 +472,11 @@ class _JPInputBoxState extends State<JPInputBox> {
           ),
           counterText: (!widget.isCounterText && widget.maxLength != null) ? '' : null,
           border:  UnderlineInputBorder(
-            borderSide: BorderSide(color: JPAppTheme.themeColors.inverse, width: 1.5),
+            borderSide: BorderSide(color: AppTheme.themeColors.inverse, width: 1.5),
           ),
           filled: widget.disabled || widget.fillColor != null,
           fillColor:
-          widget.disabled ? JPColor.lightGray : widget.fillColor,
+          widget.disabled ? UFUColor.lightGray : widget.fillColor,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           enabledBorder: getInActiveBorder(),
           disabledBorder: getInActiveBorder(),
@@ -489,13 +485,13 @@ class _JPInputBoxState extends State<JPInputBox> {
           errorBorder: getInActiveBorder(),
           contentPadding: getContentPadding(),
           isCollapsed: true,
-          isDense: widget.type == JPInputBoxType.inline,
+          isDense: widget.type == UFUInputBoxType.inline,
           hintText: widget.hintText,
           floatingLabelAlignment: FloatingLabelAlignment.start,
           hintStyle: getStyle().copyWith(
-              color: widget.type == JPInputBoxType.composeEmail ?
-              JPAppTheme.themeColors.tertiary :
-              JPAppTheme.themeColors.text.withOpacity(0.3) ,
+              color: widget.type == UFUInputBoxType.composeEmail ?
+              AppTheme.themeColors.tertiary :
+              AppTheme.themeColors.text.withValues(alpha:0.3) ,
               fontSize: typeToHintFontSize(),
               letterSpacing: 0
           ),
@@ -514,44 +510,44 @@ class _JPInputBoxState extends State<JPInputBox> {
   }
 
   InputBorder getInActiveBorder() {
-    if(widget.type == JPInputBoxType.searchbarWithoutBorder
-        || widget.type == JPInputBoxType.composeEmail
-        || widget.type == JPInputBoxType.inline
+    if(widget.type == UFUInputBoxType.searchbarWithoutBorder
+        || widget.type == UFUInputBoxType.composeEmail
+        || widget.type == UFUInputBoxType.inline
     ) {
       return InputBorder.none;
     } else {
       return OutlineInputBorder(
         gapPadding: 0,
-        borderRadius: (widget.type == JPInputBoxType.searchbar)
+        borderRadius: (widget.type == UFUInputBoxType.searchbar)
             ? BorderRadius.circular(25.0)
             : BorderRadius.circular(8.0),
         borderSide: BorderSide(
             width: 0.8,
             color:
-                widget.borderColor ?? (errorText.isNotEmpty && widget.type != JPInputBoxType.searchbar
-                    ? JPAppTheme.themeColors.red.withOpacity(0.4)
-                    : JPAppTheme.themeColors.dimGray)),
+                widget.borderColor ?? (errorText.isNotEmpty && widget.type != UFUInputBoxType.searchbar
+                    ? AppTheme.themeColors.red.withValues(alpha:0.4)
+                    : AppTheme.themeColors.dimGray)),
       );
     }
   }
 
   InputBorder getActiveBorder() {
-    if(widget.type == JPInputBoxType.searchbarWithoutBorder
-        || widget.type == JPInputBoxType.composeEmail
-        || widget.type == JPInputBoxType.inline
+    if(widget.type == UFUInputBoxType.searchbarWithoutBorder
+        || widget.type == UFUInputBoxType.composeEmail
+        || widget.type == UFUInputBoxType.inline
     ) {
       return InputBorder.none;
     } else {
       return OutlineInputBorder(
         gapPadding: 0,
-        borderRadius: (widget.type == JPInputBoxType.searchbar)
+        borderRadius: (widget.type == UFUInputBoxType.searchbar)
             ? BorderRadius.circular(25.0)
             : BorderRadius.circular(8.0),
         borderSide: BorderSide(
           width: 0.8,
-          color: widget.borderColor ?? ((widget.type == JPInputBoxType.searchbar)
-              ? JPAppTheme.themeColors.dimGray
-              : JPAppTheme.themeColors.primary),
+          color: widget.borderColor ?? ((widget.type == UFUInputBoxType.searchbar)
+              ? AppTheme.themeColors.dimGray
+              : AppTheme.themeColors.primary),
         ),
       );
     }
@@ -559,7 +555,7 @@ class _JPInputBoxState extends State<JPInputBox> {
 
   EdgeInsets getContentPadding() {
 
-    if (widget.type == JPInputBoxType.inline) {
+    if (widget.type == UFUInputBoxType.inline) {
       return const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 6
@@ -580,9 +576,9 @@ class _JPInputBoxState extends State<JPInputBox> {
     }
 
     switch (widget.type) {
-      case JPInputBoxType.withoutLabel:
+      case UFUInputBoxType.withoutLabel:
         return 16;
-      case JPInputBoxType.composeEmail:
+      case UFUInputBoxType.composeEmail:
         return 15;
       default:
         return widget.padding?.vertical ?? 13;
@@ -590,20 +586,20 @@ class _JPInputBoxState extends State<JPInputBox> {
   }
 
   double getHorizontalPadding() {
-    if (widget.type == JPInputBoxType.searchbar || widget.isExtWidget) {
+    if (widget.type == UFUInputBoxType.searchbar || widget.isExtWidget) {
       if (showClearButton) return 0;
       return 6;
     }
-    if(widget.type == JPInputBoxType.composeEmail){
+    if(widget.type == UFUInputBoxType.composeEmail){
       return 16;
     }
     return widget.padding?.horizontal ?? 15;
   }
 
   bool doShowLabel() {
-    return (widget.type == JPInputBoxType.withLabel ||
-            widget.type == JPInputBoxType.withLabelOutside ||
-            widget.type == JPInputBoxType.withLabelAndClearIcon) &&
+    return (widget.type == UFUInputBoxType.withLabel ||
+            widget.type == UFUInputBoxType.withLabelOutside ||
+            widget.type == UFUInputBoxType.withLabelAndClearIcon) &&
         widget.label != null;
   }
 
@@ -617,7 +613,7 @@ class _JPInputBoxState extends State<JPInputBox> {
           height: 25,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
-            color: JPColor.lightGray,
+            color: UFUColor.lightGray,
           ),
           constraints: const BoxConstraints(maxWidth: 80),
           child: TextFormField(
@@ -629,10 +625,9 @@ class _JPInputBoxState extends State<JPInputBox> {
             controller: extInputBoxController.controller,
             maxLength: 12,
             style: getStyle().copyWith(
-                    color: widget.textColor ?? JPAppTheme.themeColors.text
-                        .withOpacity(widget.disabled ? 0.4 : 1),
-                    fontSize: TextHelper.getTextSize(JPTextSize.heading5),
-                  ),
+              color: widget.textColor ?? AppTheme.themeColors.text.withValues(alpha:widget.disabled ? 0.4 : 1),
+              fontSize: TextHelper.getTextSize(UFUTextSize.heading5),
+            ),
             decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
                 counterText: '',
@@ -644,12 +639,12 @@ class _JPInputBoxState extends State<JPInputBox> {
                 ),
                 hintText: 'Ext',
                 hintStyle: getStyle().copyWith(
-                      color: JPAppTheme.themeColors.text.withOpacity(0.3) ,
+                      color: AppTheme.themeColors.text.withValues(alpha:0.3) ,
                       fontSize: 14.0,
                       letterSpacing: 0,
                       height: 0
                     ),
-                fillColor: JPColor.lightGray
+                fillColor: UFUColor.lightGray
               ),
           ),
         ),
@@ -661,16 +656,16 @@ class _JPInputBoxState extends State<JPInputBox> {
 
   Widget? getPrefixChild() {
 
-    if(widget.type == JPInputBoxType.searchbar) {
+    if(widget.type == UFUInputBoxType.searchbar) {
       return Padding(
         padding: const EdgeInsets.only(
           left: 12,
           right: 6,
         ),
         child: widget.prefixChild ??
-            JPIcon(
+            UFUIcon(
               Icons.search,
-              color: JPAppTheme.themeColors.dimGray,
+              color: AppTheme.themeColors.dimGray,
               size: 25,
             ),
       );
@@ -702,10 +697,10 @@ class _JPInputBoxState extends State<JPInputBox> {
   double getBorderRadius() {
     switch (widget.type) {
 
-      case JPInputBoxType.searchbar:
+      case UFUInputBoxType.searchbar:
         return 50;
 
-      case JPInputBoxType.inline:
+      case UFUInputBoxType.inline:
         return 4;
 
       default:
@@ -714,9 +709,9 @@ class _JPInputBoxState extends State<JPInputBox> {
   }
 
   bool doShowClearIcon() =>
-      widget.type == JPInputBoxType.searchbar ||
-      widget.type == JPInputBoxType.searchbarWithoutBorder ||
-      widget.type == JPInputBoxType.withLabelAndClearIcon;
+      widget.type == UFUInputBoxType.searchbar ||
+      widget.type == UFUInputBoxType.searchbarWithoutBorder ||
+      widget.type == UFUInputBoxType.withLabelAndClearIcon;
 
   String? validateField(String? value) {
     setState(() {
@@ -729,10 +724,10 @@ class _JPInputBoxState extends State<JPInputBox> {
 
   double typeToHintFontSize() {
     switch(widget.type) {
-      case JPInputBoxType.composeEmail:
+      case UFUInputBoxType.composeEmail:
         return 12.0;
 
-      case JPInputBoxType.withLabelOutside:
+      case UFUInputBoxType.withLabelOutside:
         return 15;
 
       default:

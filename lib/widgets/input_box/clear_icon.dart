@@ -1,46 +1,46 @@
 
 import 'package:flutter/material.dart';
-import 'package:jp_mobile_flutter_ui/jp_mobile_flutter_ui.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-class JPInputBoxClearIcon extends StatelessWidget {
-  const JPInputBoxClearIcon({
-    Key? key,
+class UFUInputBoxClearIcon extends StatelessWidget {
+  const UFUInputBoxClearIcon({
+    super.key,
     this.cancelButtonColor,
     this.cancelButtonSize = 22,
     required this.type
-  }) : super(key: key);
+  });
 
   final Color? cancelButtonColor;
 
   final double? cancelButtonSize;
 
-  final JPInputBoxType type;
+  final UFUInputBoxType type;
 
   @override
   Widget build(BuildContext context) {
 
     switch(type) {
-      case JPInputBoxType.withLabelAndClearIcon:
+      case UFUInputBoxType.withLabelAndClearIcon:
         return Container(
           height: 18,
           width: 18,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: cancelButtonColor ?? JPAppTheme.themeColors.secondaryText
+              color: cancelButtonColor ?? AppTheme.themeColors.secondaryText
             )
           ),
-          child: JPIcon(
+          child: UFUIcon(
             Icons.clear,
             size: 15,
-            color: JPAppTheme.themeColors.secondary,
+            color: AppTheme.themeColors.secondary,
           ),
         );
 
-      case JPInputBoxType.searchbarWithoutBorder:
-        return JPIcon(
+      case UFUInputBoxType.searchbarWithoutBorder:
+        return UFUIcon(
           Icons.cancel,
-          color: cancelButtonColor ?? JPAppTheme.themeColors.secondaryText,
+          color: cancelButtonColor ?? AppTheme.themeColors.secondaryText,
           size: cancelButtonSize,
         );
 

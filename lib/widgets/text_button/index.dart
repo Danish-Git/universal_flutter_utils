@@ -19,8 +19,8 @@ class UFUTextButton extends StatelessWidget {
     this.iconSize = 16,
     this.isExpanded = false,
     this.isDisabled = false,
-    Key? key,
-  })  : super(key: key);
+    super.key,
+  });
 
   // Defines text used in textbutton
   final String? text;
@@ -122,8 +122,8 @@ class UFUTextButton extends StatelessWidget {
     return InkWell(
       onTap: isDisabled ? null : onPressed,
       onLongPress: onLongPress,
-      highlightColor: highlightColor ?? defaultColor.withOpacity(0.1),
-      splashColor: highlightColor ?? defaultColor.withOpacity(0.1),
+      highlightColor: highlightColor ?? defaultColor.withValues(alpha:0.1),
+      splashColor: highlightColor ?? defaultColor.withValues(alpha:0.1),
       borderRadius: BorderRadius.circular(text != null ? 5 : 10),
       child: Opacity(
         opacity: isDisabled ? 0.4 : 1,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jp_mobile_flutter_ui/jp_mobile_flutter_ui.dart';
-class JPSingleSelectModel {
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
+
+class UFUSingleSelectModel {
   String label;
   String subLabel;
   String id;
@@ -14,9 +15,9 @@ class JPSingleSelectModel {
   String? prefixLabel;
   bool? isEditable;
   bool? active;
-  JPInputBoxController? labelController;
+  UFUInputBoxController? labelController;
 
-  JPSingleSelectModel({
+  UFUSingleSelectModel({
     required this.label,
     required this.id,
     this.child,
@@ -33,8 +34,8 @@ class JPSingleSelectModel {
     this.active = true
   });
 
-  factory JPSingleSelectModel.clone(JPSingleSelectModel source) {
-    return JPSingleSelectModel(
+  factory UFUSingleSelectModel.clone(UFUSingleSelectModel source) {
+    return UFUSingleSelectModel(
       id: source.id,
       label: source.label,
       color: source.color,
@@ -47,7 +48,7 @@ class JPSingleSelectModel {
       suffix: source.suffix,
       additionalData: source.additionalData,
       isEditable: source.isEditable,
-      labelController: JPInputBoxController(text: source.label),
+      labelController: UFUInputBoxController(text: source.label),
       active: source.active
     );
   }

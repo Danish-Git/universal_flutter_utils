@@ -26,7 +26,7 @@ class UFUSingleSelectHeader extends StatelessWidget {
   //Single select header title
   final String title;
 
-  //Placeholder of searchbox
+  //Placeholder of searchBox
   final String? inputHintText;
 
   final bool canShowSearchBar;
@@ -101,14 +101,14 @@ class UFUSingleSelectHeader extends StatelessWidget {
           ),
               if(canShowIconButton)
                 UFUIconButton(
-                backgroundColor: iconButtonBackgroundColor,
-                borderRadius: iconButtonBorderRadius,
-                onTap: onIconButtonTap,
-                icon: iconButtonIcon,
-                iconSize: iconButtonIconSize,
-                iconColor: iconButtonIconColor,
-                iconWidget: iconButtonIconWidget,
-              )
+                  backgroundColor: iconButtonBackgroundColor,
+                  borderRadius: iconButtonBorderRadius,
+                  onTap: onIconButtonTap,
+                  icon: iconButtonIcon,
+                  iconSize: iconButtonIconSize,
+                  iconColor: iconButtonIconColor,
+                  iconWidget: iconButtonIconWidget,
+                )
             ],
           ),
         ),

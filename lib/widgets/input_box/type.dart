@@ -1,4 +1,4 @@
-enum JPInputBoxType {
+enum UFUInputBoxType {
   searchbar,
   withLabel,
   withLabelAndClearIcon,

@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  scroll_to_index: ^3.0.1
+
   intl: ^0.20.1
   get: ^4.6.6
 

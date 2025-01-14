@@ -32,5 +32,4 @@ enum UFUTextSize {
   /// Font Size - 30
   size28,
 
-
 }

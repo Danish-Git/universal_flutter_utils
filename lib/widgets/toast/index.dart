@@ -11,25 +11,25 @@ class UFUToast{
         snackPosition: SnackPosition.BOTTOM,
         titleText: UFUText(
           text: title ?? UFUtils.appName,
-          textSize: UFUTextSize.large,
-          textWeight: UFUTextWeight.bold,
+          textSize: UFUTextSize.heading2,
+          fontWeight: UFUFontWeight.bold,
         ),
         messageText: UFUText(
           text: message,
-          textWeight: UFUTextWeight.normal,
-          textSize: UFUTextSize.medium,
-          maxLines: 5,
+          fontWeight: UFUFontWeight.regular,
+          textSize: UFUTextSize.heading4,
+          maxLine: 5,
         ),
         margin: EdgeInsets.fromLTRB(15, 0, 15, MediaQuery.of(Get.context!).padding.bottom + 16),
         borderRadius: 8,
         snackStyle: SnackStyle.GROUNDED,
         boxShadows: [
           BoxShadow(
-            color: AppTheme.themeColor.dimGrayColor,
+            color: AppTheme.themeColors.dimGray,
             spreadRadius: 2,
           ),
         ],
-        borderColor: AppTheme.themeColor.primaryColor,
+        borderColor: AppTheme.themeColors.primary,
         borderWidth: 3
     );
   }

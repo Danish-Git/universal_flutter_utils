@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class JPInputBoxController {
+class UFUInputBoxController {
 
   bool validateOnChange = false;
   Function(String)? validator;
@@ -15,7 +15,7 @@ class JPInputBoxController {
 
   String get text => controller.text;
 
-  JPInputBoxController({String? text, bool validateInRealTime = false}) {
+  UFUInputBoxController({String? text, bool validateInRealTime = false}) {
     if(text != null)  this.text = text;
 
     if (validateInRealTime) {

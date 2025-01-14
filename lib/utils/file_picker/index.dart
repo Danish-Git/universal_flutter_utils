@@ -1,7 +1,5 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
-import 'package:universal_flutter_utils/widgets/bottom_sheet/index.dart';
 
 class UFFilePickerUtil {
 
@@ -9,19 +7,19 @@ class UFFilePickerUtil {
 
     if (!(await UFUtils.permissionUtils.getStoragePermission())) {
 
-      UFUBottomSheet(childBuilder: (controller) => Column(
-        children: [
-          UFUText(text: "text"),
-          Row(
-            children: [
-              Flexible(
-                flex: 1,
-                child: UFUButton(),
-              )
-            ],
-          )
-        ],
-      ));
+      // UFUBottomSheet(childBuilder: (controller) => Column(
+      //   children: [
+      //     UFUText(text: "text"),
+      //     Row(
+      //       children: [
+      //         Flexible(
+      //           flex: 1,
+      //           child: UFUButton(),
+      //         )
+      //       ],
+      //     )
+      //   ],
+      // ));
 
       // await apiService.handleError(CustomException('pleaseProvideStoragePermission'.tr, 800));
       return;

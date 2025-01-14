@@ -1,5 +1,5 @@
 
-enum JPSingleSelectType {
+enum UFUSingleSelectType {
   network,
   local
 }

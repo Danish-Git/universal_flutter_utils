@@ -36,10 +36,13 @@ class UFUResponsiveBuilder extends StatelessWidget {
 // ignore: must_be_immutable
 class UFULayoutBuilder extends StatelessWidget {
   UFULayoutBuilder({
-    Key? key,
+    super.key,
     required this.child,
     this.onUpdate,
-  }) : super(key: key);
+  }) {
+    // TODO: implement
+    throw UnimplementedError();
+  }
 
   final Widget child;
 

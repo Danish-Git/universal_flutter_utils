@@ -1,41 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:jp_mobile_flutter_ui/jp_mobile_flutter_ui.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-class JPSingleSelect extends StatefulWidget {
-  const JPSingleSelect(
-      {required this.mainList,
-      this.selectedItemId,
-      this.onItemSelect,
-      this.isFilterSheet = false,
-      this.inputHintText,
-      this.title = 'select option',
-      this.canShowIconButton = false,
-      this.iconButtonBackgroundColor,
-      this.iconButtonBorderRadius,
-      this.onIconButtonTap,
-      this.iconButtonIcon,
-      this.iconButtonIconSize,
-      this.iconButtonIconColor,
-      this.iconButtonIconWidget,
-      this.suffixButtonText,
-      this.prefixButtonText,
-      this.onTapSuffixBtn,
-      this.onTapPrefixBtn,
-      this.type = JPSingleSelectType.local,
-      this.isLoading = false,
-      this.onLoadMore,
-      this.isLoadMore = false,
-      this.listLoader,
-      this.canShowLoadMore = false,
-      this.onSearch,
-      this.canShowSearchBar,
-      this.showIncludeInactiveButton = false,
-      Key? key})
-      : super(key: key);
+
+class UFUSingleSelect extends StatefulWidget {
+  const UFUSingleSelect({
+    required this.mainList,
+    this.selectedItemId,
+    this.onItemSelect,
+    this.isFilterSheet = false,
+    this.inputHintText,
+    this.title = 'select option',
+    this.canShowIconButton = false,
+    this.iconButtonBackgroundColor,
+    this.iconButtonBorderRadius,
+    this.onIconButtonTap,
+    this.iconButtonIcon,
+    this.iconButtonIconSize,
+    this.iconButtonIconColor,
+    this.iconButtonIconWidget,
+    this.suffixButtonText,
+    this.prefixButtonText,
+    this.onTapSuffixBtn,
+    this.onTapPrefixBtn,
+    this.type = UFUSingleSelectType.local,
+    this.isLoading = false,
+    this.onLoadMore,
+    this.isLoadMore = false,
+    this.listLoader,
+    this.canShowLoadMore = false,
+    this.onSearch,
+    this.canShowSearchBar,
+    this.showIncludeInactiveButton = false,
+    super.key
+  });
 
   //Main list of which will have all elements
-  final List<JPSingleSelectModel> mainList;
+  final List<UFUSingleSelectModel> mainList;
 
   //Selected item id from the list
   final String? selectedItemId;
@@ -69,8 +70,8 @@ class JPSingleSelect extends StatefulWidget {
   final VoidCallback? onTapPrefixBtn;
 
   /// type can be used to differentiate between network list and local list
-  /// default selected type is [JPSingleSelectType.local]
-  final JPSingleSelectType type;
+  /// default selected type is [UFUSingleSelectType.local]
+  final UFUSingleSelectType type;
 
   /// In case of network list isLoading helps to manage loading state
   final bool isLoading;
@@ -97,11 +98,11 @@ class JPSingleSelect extends StatefulWidget {
   final bool showIncludeInactiveButton;
 
   @override
-  _JPSingleSelectState createState() => _JPSingleSelectState();
+  _UFUSingleSelectState createState() => _UFUSingleSelectState();
 }
 
-class _JPSingleSelectState extends State<JPSingleSelect> {
-  List<JPSingleSelectModel> list = [];
+class _UFUSingleSelectState extends State<UFUSingleSelect> {
+  List<UFUSingleSelectModel> list = [];
   TextEditingController textEditingController = TextEditingController();
   final scrollController = AutoScrollController(
     initialScrollOffset: 0,
@@ -135,7 +136,7 @@ class _JPSingleSelectState extends State<JPSingleSelect> {
   }
 
   /// get list based on inactive or active user
-  List<JPSingleSelectModel> getList () {
+  List<UFUSingleSelectModel> getList () {
     if(widget.showIncludeInactiveButton && list.any((element) => !(element.active ?? true) && widget.selectedItemId == element.id)) {
       includeInactive = true;
     } 
@@ -151,7 +152,7 @@ class _JPSingleSelectState extends State<JPSingleSelect> {
     list = widget.mainList;
     selectedItemId = widget.selectedItemId;
 
-    if (widget.type == JPSingleSelectType.network) {
+    if (widget.type == UFUSingleSelectType.network) {
       // adding a listener in case of network listing
       scrollController.addListener(() {
         if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && widget.onLoadMore != null && !widget.isLoadMore) {
@@ -171,7 +172,7 @@ class _JPSingleSelectState extends State<JPSingleSelect> {
 
   @override
   Widget build(BuildContext context) {
-    return JPSingleSelectView(
+    return UFUSingleSelectView(
       isVisible: isVisibile,
       list: getList(),
       scrollController: scrollController,
@@ -214,7 +215,7 @@ class _JPSingleSelectState extends State<JPSingleSelect> {
 
   // onSearch() : is used to differentiate working for local list and network list
   void onSearch(String value) async {
-    if (widget.type == JPSingleSelectType.network && widget.onSearch != null) {
+    if (widget.type == UFUSingleSelectType.network && widget.onSearch != null) {
       widget.onSearch!(value);
     } else {
       setState(() {
