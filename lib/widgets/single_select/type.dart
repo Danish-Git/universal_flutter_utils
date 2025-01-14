@@ -1,0 +1,5 @@
+
+enum JPSingleSelectType {
+  network,
+  local
+}

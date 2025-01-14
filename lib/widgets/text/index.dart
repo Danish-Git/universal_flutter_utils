@@ -1,49 +1,83 @@
 import 'package:flutter/material.dart';
-
-import '../../theme/index.dart';
-import 'enum/text_size.dart';
-import 'enum/text_weight.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 class UFUText extends StatelessWidget {
   const UFUText({
-    super.key,
     required this.text,
-    this.maxLines,
-    this.textAlign = TextAlign.left,
-    this.color,
-    this.overflow = TextOverflow.ellipsis,
-    this.textWeight = UFUTextWeight.normal,
-    this.textSize = UFUTextSize.medium,
-    this.isUnderline = false,
-    this.isItalic = false,
-  });
+    this.textSize = UFUTextSize.heading4,
+    this.fontFamily = UFUFontFamily.roboto,
+    this.fontWeight = UFUFontWeight.regular,
+    this.textColor,
+    this.overflow,
+    this.textAlign = TextAlign.center,
+    this.maxLine,
+    this.textDecoration,
+    this.letterSpacing,
+    this.dynamicFontSize,
+    this.height,
+    this.isSelectable = false,
+    this.fontStyle = FontStyle.normal,
+    super.key});
 
+  /// Defines text of a text.
   final String text;
-  final int? maxLines;
-  final TextAlign? textAlign;
-  final Color? color;
-  final TextOverflow? overflow;
-  final UFUTextWeight? textWeight;
+
+  /// Defines textSize of a text.
   final UFUTextSize? textSize;
-  final bool isUnderline;
-  final bool isItalic;
+
+  /// Defines fontFamily of a text.
+  final UFUFontFamily? fontFamily;
+
+  /// Defines fontWeight of a text.
+  final UFUFontWeight? fontWeight;
+
+  /// Defines textColor [JPAppTheme.themeColors.text] of a text.
+  final Color? textColor;
+
+  /// Defines overflow of a text.
+  final TextOverflow? overflow;
+
+  /// Defines textAlign of a text.
+  final TextAlign textAlign;
+
+  /// Defines maxLine of a text.
+  final int? maxLine;
+
+  ///Defines text decoration
+  final TextDecoration? textDecoration;
+
+  final double? letterSpacing;
+
+  final double? height;
+
+  final double? dynamicFontSize;
+
+  /// isSelectable makes text interactive, default value is [false]
+  final bool isSelectable;
+
+  /// fontStyle give text italic or normal style
+  final FontStyle fontStyle;
+
+  String getText(String text) {
+    text = text.replaceAll('&amp;', '&');
+    return overflow != null ?  text.replaceAll('', '\u200B') : text;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      maxLines: maxLines,
+    return isSelectable ? SelectableText(
+      getText(text),
+      enableInteractiveSelection: true,
       textAlign: textAlign,
-      textScaler: const TextScaler.linear(1),
-      style: TextStyle(
-        color: color ?? AppTheme.themeColor.textColor,
-        fontWeight: UFUTextWeightHelper.getFontWeight(textWeight),
-        fontSize: UFUTextSizeHelper.getFontSize(textSize),
-        overflow: overflow,
-        decoration: isUnderline ? TextDecoration.underline : TextDecoration.none, // Apply underline
-        fontStyle: isItalic ? FontStyle.italic : FontStyle.normal, // Apply italic
-      ),
+      maxLines: maxLine,
+      selectionControls: MaterialTextSelectionControls(),
+      showCursor: false,
+      style: TextHelper.getTextStyle(textColor, fontWeight, textSize, dynamicFontSize, fontFamily, overflow, height, letterSpacing, textDecoration, fontStyle)
+    ) : Text(
+      getText(text),
+      textAlign: textAlign,
+      maxLines: maxLine,
+      style: TextHelper.getTextStyle(textColor, fontWeight, textSize, dynamicFontSize, fontFamily, overflow, height, letterSpacing, textDecoration, fontStyle)
     );
   }
 }
-
