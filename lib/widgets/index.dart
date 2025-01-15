@@ -25,3 +25,6 @@ export 'animated_spin_kit/fading_circle.dart';
 export 'animated_spin_kit/three_bounce.dart';
 export 'avatar/index.dart';
 export 'avatar/size.dart';
+export 'text_span/index.dart';
+export 'read_more_text/index.dart';
+export 'read_more_text/read_more_dialog.dart';
