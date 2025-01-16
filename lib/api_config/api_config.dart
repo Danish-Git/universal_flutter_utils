@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 import 'interceptors/request_interceptor.dart';
 import 'interceptors/response_interceptor.dart';
 import 'interceptors/error_interceptor.dart';
@@ -8,7 +9,7 @@ class UFApiConfig {
 
   UFApiConfig() {
     _dio.options
-      ..baseUrl = 'https://api.example.com'
+      ..baseUrl = UFUtils.baseUrl
       ..connectTimeout = const Duration(seconds: 10)
       ..receiveTimeout = const Duration(seconds: 10);
 

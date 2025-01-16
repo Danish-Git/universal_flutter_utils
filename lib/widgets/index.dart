@@ -28,3 +28,7 @@ export 'avatar/size.dart';
 export 'text_span/index.dart';
 export 'read_more_text/index.dart';
 export 'read_more_text/read_more_dialog.dart';
+export 'animations/index.dart';
+export 'animations/scale_and_rotate.dart';
+export 'animations/scale_in_out.dart';
+export 'confirmation_dialog/index.dart';

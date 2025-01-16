@@ -6,6 +6,8 @@ import 'permissions/index.dart';
 
 class UFUtils {
   static String appName = UFUAppConfig.appName;
+  static String baseUrl = UFUAppConfig.baseUrl;
+  static String socketBaseUrl = UFUAppConfig.socketBaseUrl;
 
   ///   Form Validations
   static String? emailValidator(String? value, {bool isRequired = true}) => FormValidator.emailValidator(value, isRequired: isRequired);
