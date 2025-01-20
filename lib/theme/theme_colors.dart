@@ -35,9 +35,9 @@ class ThemeColors {
   Color oliveGreen;
   Color darkPurple;
   Color lightPurple;
-  Color  uranianBlue;
+  Color uranianBlue;
   Color cornFlowerBlue;
-  Color gradientblue;
+  Color gradientBlue;
   Color draft;
   Color lightestGray;
   Color dimRed;
@@ -83,7 +83,7 @@ class ThemeColors {
     this.darkYellow = UFUColor.darkYellow,
     this.cornFlowerBlue = UFUColor.cornflowerBlue,
     this.uranianBlue = UFUColor.uranianBlue,
-    this.gradientblue = UFUColor.gradientblue,
+    this.gradientBlue = UFUColor.gradientBlue,
     this.draft = UFUColor.draft,
     this.lightestGray = UFUColor.lightestGray,
     this.dimRed = UFUColor.dimRed,
@@ -130,7 +130,7 @@ class ThemeColors {
     this.darkYellow = UFUColor.darkYellow,
     this.cornFlowerBlue = UFUColor.cornflowerBlue,
     this.uranianBlue = UFUColor.uranianBlue,
-    this.gradientblue = UFUColor.gradientblue,
+    this.gradientBlue = UFUColor.gradientBlue,
     this.draft = UFUColor.draft,
     this.lightestGray = UFUColor.lightestGray,
     this.dimRed = UFUColor.dimRed,

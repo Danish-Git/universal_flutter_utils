@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UFUColor {
   static const Color blue = Color(0xff418BCA);
-  static const Color gradientblue = Color(0xff4178CA);
+  static const Color gradientBlue = Color(0xff4178CA);
   static const Color lightBlue = Color(0xffdae5ff);
   static const Color maroon = Color(0xffC81B1B);
   static const Color black = Color(0xff222326);
@@ -40,7 +40,7 @@ class UFUColor {
   static const Color oliveGreen = Color(0xff9CC39F) ;
   static const Color lightPurple = Color(0xffCFDFFF);
   static const Color darkPurple = Color(0xff889CC6);
-  static const Color  uranianBlue = Color(0xffC5E6FF) ;
+  static const Color uranianBlue = Color(0xffC5E6FF) ;
   static const Color cornflowerBlue = Color(0xff92C5EC);
   static const Color green = Color(0xff008000);
   static const Color dimRed = Color(0xfff8d7da);
