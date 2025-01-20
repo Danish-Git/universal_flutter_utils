@@ -175,7 +175,7 @@ class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
           flex: UFUResponsiveDesign.popOverButtonFlex,
           child: UFUButton(
             text: widget.prefixBtnText?.toUpperCase(),
-            textColor: AppTheme.themeColors.tertiary,
+            textColor: AppTheme.themeColors.primary,
             size: UFUButtonSize.small,
             disabled: widget.disableButtons,
             colorType: UFUButtonColorType.lightGray,
@@ -196,7 +196,7 @@ class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
                 : '',
             textColor: AppTheme.themeColors.base,
             size: UFUButtonSize.small,
-            colorType: UFUButtonColorType.tertiary,
+            colorType: UFUButtonColorType.primary,
             onPressed: widget.onTapSuffix,
             iconWidget: widget.suffixBtnIcon,
             disabled: widget.disableButtons,

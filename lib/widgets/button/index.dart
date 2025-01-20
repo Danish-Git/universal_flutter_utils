@@ -108,7 +108,7 @@ class UFUButton extends StatelessWidget {
       case UFUButtonColorType.lightGray:
         color = (type == UFUButtonType.outline)
             ? AppTheme.themeColors.inverse
-            : AppTheme.themeColors.tertiary;
+            : AppTheme.themeColors.primary;
         break;
 
       default:
@@ -125,13 +125,13 @@ class UFUButton extends StatelessWidget {
       return UFUColor.transparent;
     }
 
-    Color color = AppTheme.themeColors.themeGreen;
+    Color color = AppTheme.themeColors.secondary;
 
     switch (colorType) {
       case UFUButtonColorType.primary:
         color = size == UFUButtonSize.floatingButton
             ? AppTheme.themeColors.themeBlue
-            : AppTheme.themeColors.themeGreen;
+            : AppTheme.themeColors.primary;
         break;
 
       case UFUButtonColorType.tertiary:

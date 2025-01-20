@@ -1,47 +1,57 @@
-import 'package:example/widgets/avtar_samples.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-import 'widgets/button_samples.dart';
-import 'widgets/icon_button_samples.dart';
+import 'api_calls/view/index.dart';
 import 'widgets/index.dart';
-import 'widgets/selectors_sample.dart';
-import 'widgets/text_button_samples.dart';
-import 'widgets/text_samples.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    UFUtils.appName = "Universal Flutter Utils Demo";
+    UFUtils.baseUrl = "https://dummyjson.com/";
+    AppTheme.setThemeColors(
+      primary: Color(0xff9381ff),
+      secondary: Color(0xffb8b8ff),
+      tertiary: Color(0xffffd8be),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: UFUtils.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        backgroundColor: AppTheme.themeColors.primary,
+        title: Text(UFUtils.appName),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -50,6 +60,8 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               UFUButton(text: "Widgets Sample", onPressed: () => Get.to(WidgetsSamples())),
+              ...divider(),
+              UFUButton(text: "API Sample Call's", onPressed: () => Get.to(APISampleCalls())),
               ...divider(),
             ],
           ),

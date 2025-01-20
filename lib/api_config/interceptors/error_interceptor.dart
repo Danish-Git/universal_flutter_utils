@@ -6,9 +6,18 @@ import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    _handleError(err, () {
+    _handleError(err, () async {
       // Retry logic: Pass the retry functionality as needed
-      handler.next(err); // Continue with the intercepted error
+      // handler.next(err); // Continue with the intercepted error
+
+      try {
+        // Retry the request
+        final retryResponse = await _retryRequest(err.requestOptions);
+        handler.resolve(retryResponse); // Return the successful retry response
+      } catch (retryError) {
+        handler.next(retryError as DioException); // Pass the error if retry fails
+      }
+
     });
   }
 
@@ -28,7 +37,15 @@ class ErrorInterceptor extends Interceptor {
       case DioExceptionType.badResponse:
       // Handle server errors (like 4xx and 5xx)
         final statusCode = error.response?.statusCode ?? 0;
-        message = 'Server error: HTTP $statusCode';
+        switch (statusCode) {
+          case 401:
+            title = 'Unauthrizer Access';
+            message = 'You are not authorized to access';
+            break;
+          default:
+            message = 'Server error: HTTP $statusCode';
+            break;
+        }
         break;
       case DioExceptionType.connectionError:
         message = 'No internet connection.';
@@ -51,7 +68,7 @@ class ErrorInterceptor extends Interceptor {
         },
       ),
       // _buildErrorBottomSheet(title, message, showRetry, retryCallback),
-      backgroundColor: Colors.white,
+      backgroundColor: AppTheme.themeColors.base,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -59,4 +76,17 @@ class ErrorInterceptor extends Interceptor {
     );
   }
 
+  Future<dynamic> _retryRequest(RequestOptions requestOptions) async {
+    final dio = Dio(); // Use your Dio instance
+    dio.options.headers = requestOptions.headers; // Copy headers
+    return await dio.request(
+      requestOptions.path,
+      data: requestOptions.data,
+      queryParameters: requestOptions.queryParameters,
+      options: Options(
+        method: requestOptions.method,
+        headers: requestOptions.headers,
+      ),
+    );
+  }
 }

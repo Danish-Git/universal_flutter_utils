@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 class RequestInterceptor extends Interceptor {
   @override
@@ -8,23 +9,23 @@ class RequestInterceptor extends Interceptor {
     bool isConnected = await _checkInternetConnection();
     if (!isConnected) {
       return handler.reject(
-        DioError(
+        DioException(
           requestOptions: options,
           error: 'No Internet connection',
-          type: DioErrorType.connectionError,
+          type: DioExceptionType.connectionError,
         ),
       );
     }
 
     // Add headers
-    options.headers['Authorization'] = 'Bearer YOUR_TOKEN_HERE';
+    options.headers['Authorization'] = 'Bearer ${UFUtils.preferences.readAuthToken()}';
     print('Request: ${options.method} ${options.path}');
     return handler.next(options);
   }
 
   Future<bool> _checkInternetConnection() async {
     try {
-      final result = await InternetAddress.lookup('example.com');
+      final result = await InternetAddress.lookup('google.com');
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } on SocketException catch (_) {
       return false;

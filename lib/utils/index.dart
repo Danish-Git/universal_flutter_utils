@@ -3,6 +3,7 @@ import 'package:universal_flutter_utils/utils/app_config/index.dart';
 import 'date_time/index.dart';
 import 'form_validator/index.dart';
 import 'permissions/index.dart';
+import 'shared_preferences/index.dart';
 
 class UFUtils {
   static String appName = UFUAppConfig.appName;
@@ -27,5 +28,8 @@ class UFUtils {
 
   ///   Permission Handling
   static UFPermissionUtils permissionUtils = UFPermissionUtils();
+
+  ///   Shared Preferences Handling
+  static UFPrefUtils preferences = UFPrefUtils();
 
 }
