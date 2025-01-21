@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_flutter_utils/common_files/Constants/screen.dart';
-import 'package:universal_flutter_utils/common_files/Enums/device_type.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 class UFUResponsiveDesign {
 

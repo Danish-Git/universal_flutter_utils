@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:universal_flutter_utils/common_files/Constants/responsive_design.dart';
-import 'package:universal_flutter_utils/common_files/Constants/screen.dart';
-import 'package:universal_flutter_utils/common_files/Enums/device_type.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 class UFUResponsiveBuilder extends StatelessWidget {
 
@@ -29,6 +26,9 @@ class UFUResponsiveBuilder extends StatelessWidget {
 
       case DeviceType.desktop:
         return desktop ?? tablet ?? const SizedBox();
+
+      default:
+        return mobile ?? const SizedBox();
     }
   }
 }

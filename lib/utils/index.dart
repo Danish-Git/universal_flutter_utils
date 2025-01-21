@@ -32,4 +32,13 @@ class UFUtils {
   ///   Shared Preferences Handling
   static UFPrefUtils preferences = UFPrefUtils();
 
+  ///   Storage Max File Size
+  static int maxAllowedFileSize = 52428800; // Size is in bytes
+  static int singleAttachmentMaxSize = 10 * 1024 * 1024; // 10MB
+  static int totalAttachmentMaxSize = 20 * 1024 * 1024; // 20MB
+  static bool restrictFolderStructure = true;
+
+  ///   Animation Transition Duration
+  static const int transitionDuration = 150;
+
 }

@@ -7,21 +7,14 @@ class UFFilePickerUtil {
 
     if (!(await UFUtils.permissionUtils.getStoragePermission())) {
 
-      // UFUBottomSheet(childBuilder: (controller) => Column(
-      //   children: [
-      //     UFUText(text: "text"),
-      //     Row(
-      //       children: [
-      //         Flexible(
-      //           flex: 1,
-      //           child: UFUButton(),
-      //         )
-      //       ],
-      //     )
-      //   ],
-      // ));
-
-      // await apiService.handleError(CustomException('pleaseProvideStoragePermission'.tr, 800));
+      showUFUBottomSheet(child: (UFUBottomSheetController controller) => UFUConfirmationDialog(
+        title: "Permission Denied",
+        subTitle: "This action requires additional permissions. Please enable the necessary permissions in your device settings",
+        type: UFUConfirmationDialogType.message,
+        suffixBtnText: "Go to Settings",
+        onTapSuffix: () {
+        },
+      ));
       return;
     }
 
