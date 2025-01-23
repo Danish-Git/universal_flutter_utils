@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:universal_flutter_utils/utils/app_config/index.dart';
 
 import 'date_time/index.dart';
+import 'file_picker/index.dart';
 import 'form_validator/index.dart';
 import 'permissions/index.dart';
 import 'shared_preferences/index.dart';
@@ -40,5 +42,7 @@ class UFUtils {
 
   ///   Animation Transition Duration
   static const int transitionDuration = 150;
+
+  static UFFilePickerUtil picker = UFFilePickerUtil();
 
 }

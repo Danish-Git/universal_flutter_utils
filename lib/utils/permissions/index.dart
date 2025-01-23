@@ -34,7 +34,13 @@ class UFPermissionUtils {
   }
 
   Future<bool> getStoragePermission() async {
-    return await _handlePermission(Permission.storage);
+
+    bool result = await _handlePermission(Permission.storage);
+    PermissionStatus status = await Permission.storage.status;
+    if(!result) {
+      status = await Permission.manageExternalStorage.request();
+    }
+    return status.isGranted;
   }
 
   Future<bool> getCameraPermission() async {

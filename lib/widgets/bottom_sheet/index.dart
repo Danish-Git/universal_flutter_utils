@@ -107,7 +107,10 @@ Future<dynamic> showUFUDialog({
 
   return await Get.dialog(
     UFUPopUpBuilder(
-      child: child,
+      child: (controller) => Center(
+        child: Material(
+          color: Colors.transparent,
+          child: child.call(controller))),
       allowFullWidth: allowFullWidth,
       enableInsets: enableInsets,
     ),
