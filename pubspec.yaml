@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_svg: ^2.0.17
+
   scroll_to_index: ^3.0.1
 
   intl: ^0.20.1

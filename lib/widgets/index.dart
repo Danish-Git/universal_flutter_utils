@@ -32,3 +32,4 @@ export 'animations/index.dart';
 export 'animations/scale_and_rotate.dart';
 export 'animations/scale_in_out.dart';
 export 'confirmation_dialog/index.dart';
+export 'svg_image/index.dart';
