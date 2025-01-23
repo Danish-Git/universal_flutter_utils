@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:universal_flutter_utils/utils/app_config/index.dart';
 
 import 'date_time/index.dart';
+import 'file_picker/index.dart';
 import 'form_validator/index.dart';
 import 'permissions/index.dart';
 import 'shared_preferences/index.dart';
@@ -31,5 +33,16 @@ class UFUtils {
 
   ///   Shared Preferences Handling
   static UFPrefUtils preferences = UFPrefUtils();
+
+  ///   Storage Max File Size
+  static int maxAllowedFileSize = 52428800; // Size is in bytes
+  static int singleAttachmentMaxSize = 10 * 1024 * 1024; // 10MB
+  static int totalAttachmentMaxSize = 20 * 1024 * 1024; // 20MB
+  static bool restrictFolderStructure = true;
+
+  ///   Animation Transition Duration
+  static const int transitionDuration = 150;
+
+  static UFFilePickerUtil picker = UFFilePickerUtil();
 
 }

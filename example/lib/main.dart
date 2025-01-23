@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 import 'api_calls/view/index.dart';
+import 'file_picker/index.dart';
 import 'widgets/index.dart';
 
 void main() {
@@ -62,6 +63,8 @@ class MyHomePage extends StatelessWidget {
               UFUButton(text: "Widgets Sample", onPressed: () => Get.to(WidgetsSamples())),
               ...divider(),
               UFUButton(text: "API Sample Call's", onPressed: () => Get.to(APISampleCalls())),
+              ...divider(),
+              UFUButton(text: "File Picker", onPressed: () => Get.to(FilePicker())),
               ...divider(),
             ],
           ),
