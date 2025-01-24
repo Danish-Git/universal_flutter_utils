@@ -35,3 +35,4 @@ export 'confirmation_dialog/index.dart';
 export 'bottom_sheet/index.dart';
 export 'bottom_sheet/controller.dart';
 export 'bottom_sheet/custom_list_bottom_sheet/index.dart';
+export 'svg_image/index.dart';
