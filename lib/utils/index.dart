@@ -15,6 +15,7 @@ import 'package:universal_flutter_utils/utils/app_config/index.dart';
 import 'package:universal_flutter_utils/utils/file_picker/file_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../common/methods/index.dart';
 import 'date_time/index.dart';
 import 'file_picker/index.dart';
 import 'form_validator/index.dart';
