@@ -15,6 +15,9 @@ enum UFUButtonColorType {
   /// [UFUButtonColorType.secondary], used for set secondary color
   secondary,
 
+  /// [UFUButtonColorType.secondaryLight], used for set secondary color
+  secondaryLight,
+
   /// [UFUButtonColorType.transparent], used for set transparent color
   transparent,
 

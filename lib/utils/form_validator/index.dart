@@ -53,11 +53,12 @@ class FormValidator {
   }
 
   static String? phoneValidator(String? value, {bool isRequired = true}) {
+    value = value?.replaceAll(" ", "");
     if (isRequired && (value == null || value.isEmpty)) {
       return 'Phone number is required';
     }
     if (value != null && value.isNotEmpty) {
-      final phoneRegex = RegExp(r'^\d{10}\$');
+      final phoneRegex = RegExp(r'^\d{10}$');
       if (!phoneRegex.hasMatch(value)) {
         return 'Enter a valid 10-digit phone number';
       }

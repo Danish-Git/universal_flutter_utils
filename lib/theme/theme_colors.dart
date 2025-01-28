@@ -5,7 +5,9 @@ import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 class ThemeColors {
   Color base;
   Color primary;
+  Color lightPrimary;
   Color secondary;
+  Color secondaryLight;
   Color tertiary;
   Color inverse;
   Color text;
@@ -47,11 +49,14 @@ class ThemeColors {
   Color themeGreen;
   Color themeBlue;
   Color red;
+  Color transparent;
 
   ThemeColors.light({
     this.base = UFUColor.white,
     this.primary = UFUColor.themeBlue,
+    this.lightPrimary = UFUColor.themeBlue,
     this.secondary = UFUColor.themeBlack,
+    this.secondaryLight = UFUColor.themeBlack,
     this.tertiary = UFUColor.tertiary,
     this.inverse = UFUColor.lightGray,
     this.text = UFUColor.black,
@@ -93,12 +98,15 @@ class ThemeColors {
     this.themeGreen = UFUColor.themeGreen,
     this.themeBlue = UFUColor.themeBlue,
     this.red = UFUColor.red,
+    this.transparent = UFUColor.transparent,
   });
 
   ThemeColors.dark({
     this.base = UFUColor.black,
     this.primary = UFUColor.blue,
+    this.lightPrimary = UFUColor.uranianBlue,
     this.secondary = UFUColor.maroon,
+    this.secondaryLight = UFUColor.themeBlack,
     this.tertiary = UFUColor.tertiary,
     this.inverse = UFUColor.lightGray,
     this.text = UFUColor.black,
@@ -140,5 +148,6 @@ class ThemeColors {
     this.themeGreen = UFUColor.themeGreen,
     this.themeBlue = UFUColor.themeBlue,
     this.red = UFUColor.red,
+    this.transparent = UFUColor.transparent,
   });
 }

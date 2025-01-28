@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:universal_flutter_utils/utils/app_config/index.dart';
 
+import '../common/methods/index.dart';
 import 'date_time/index.dart';
 import 'file_picker/index.dart';
 import 'form_validator/index.dart';
@@ -43,6 +44,10 @@ class UFUtils {
   ///   Animation Transition Duration
   static const int transitionDuration = 150;
 
+  ///   File picker methods can be accessed using [picker] object
   static UFFilePickerUtil picker = UFFilePickerUtil();
+
+  ///   All common methods can be accessed using [commonMethods] object
+  static UFUCommonMethods commonMethods = UFUCommonMethods();
 
 }

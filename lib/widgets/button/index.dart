@@ -19,6 +19,7 @@ class UFUButton extends StatelessWidget {
     this.type = UFUButtonType.solid,
     this.width,
     this.isFlat = true,
+    this.buttonRadius = UFUButtonRadius.roundSquare,
     super.key,
   });
 
@@ -68,6 +69,8 @@ class UFUButton extends StatelessWidget {
 
   final bool isFlat;
 
+  final UFUButtonRadius? buttonRadius;
+
   /// Return textSize by using button size and default size is [UFUTextSize.heading3].
   UFUTextSize getTextSize(UFUButtonSize size) {
     switch (size) {
@@ -105,10 +108,10 @@ class UFUButton extends StatelessWidget {
             : AppTheme.themeColors.base;
         break;
 
-      case UFUButtonColorType.lightGray:
+      case UFUButtonColorType.secondaryLight:
         color = (type == UFUButtonType.outline)
             ? AppTheme.themeColors.inverse
-            : AppTheme.themeColors.primary;
+            : AppTheme.themeColors.text;
         break;
 
       default:
@@ -147,7 +150,11 @@ class UFUButton extends StatelessWidget {
         break;
 
       case UFUButtonColorType.secondary:
-        color = AppTheme.themeColors.themeGreen;
+        color = AppTheme.themeColors.secondary;
+        break;
+
+      case UFUButtonColorType.secondaryLight:
+        color = AppTheme.themeColors.secondaryLight;
         break;
 
       case UFUButtonColorType.transparent:
@@ -233,6 +240,17 @@ class UFUButton extends StatelessWidget {
         return AppTheme.themeColors.themeGreen.withValues(alpha:0.2);
       default:
         return AppTheme.themeColors.primary.withValues(alpha:0.2);
+    }
+  }
+
+  double shapeRadius() {
+    switch (buttonRadius) {
+      case UFUButtonRadius.circular:
+        return 50;
+      case UFUButtonRadius.roundSquare:
+        return 10;
+      default:
+        return 10;
     }
   }
 
@@ -353,9 +371,7 @@ class UFUButton extends StatelessWidget {
       );
     } else {
       shapeBorderType = RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          50,
-        ),
+        borderRadius: BorderRadius.circular(shapeRadius()),
         side: shapeBorder,
       );
     }
