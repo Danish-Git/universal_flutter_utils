@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:flutter_native_contact_picker/model/contact.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
@@ -108,6 +110,80 @@ class UFFilePickerUtil {
     return null;
   }
 
+  Future<DateTime?> selectDate({DateTime? initialDate, DateTime? startDate, DateTime? endDate,}) async {
+    return await showDatePicker(
+      context: Get.context!,
+      initialDate: initialDate,
+      firstDate: DateTime.now().add(const Duration(days: -(365 * 90))),
+      lastDate: startDate ?? DateTime.now().add(const Duration(days: -(365 * 8))),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: Colors.grey, // Set the dialog background color to grey
+            colorScheme: ColorScheme.light(
+              primary: AppTheme.themeColors.primary, // Header background color
+              onPrimary: AppTheme.themeColors.tertiary, // Header text color
+              onSurface: AppTheme.themeColors.text, // Body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppTheme.themeColors.primary, // Button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+  }
+
+  Future<TimeOfDay?> selectTime({TimeOfDay? initialTime}) async {
+    return await showTimePicker(
+      context: Get.context!,
+      initialTime: initialTime ?? TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false), // Ensure AM/PM format
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              dialogBackgroundColor: AppTheme.themeColors.darkGray,
+              colorScheme: ColorScheme.light(
+                primary: AppTheme.themeColors.primary, // Header background color
+                onPrimary: AppTheme.themeColors.tertiary, // Header text color
+                onSurface: AppTheme.themeColors.text, // Body text color
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  foregroundColor: AppTheme.themeColors.primary, // Button text color
+                ),
+              ),
+              timePickerTheme: TimePickerThemeData(
+                dialBackgroundColor: AppTheme.themeColors.primary.withAlpha(10), // Dial background color
+                dialHandColor: AppTheme.themeColors.primary, // Dial hand color
+                dayPeriodTextColor: WidgetStateColor.resolveWith((states) {
+                  // Customize AM/PM text colors
+                  if (states.contains(WidgetState.selected)) {
+                    return AppTheme.themeColors.tertiary; // Selected text color
+                  }
+                  return AppTheme.themeColors.primary; // Default text color
+                }),
+                dayPeriodColor: WidgetStateColor.resolveWith((states) {
+                  // Customize AM/PM button background color
+                  if (states.contains(WidgetState.selected)) {
+                    return AppTheme.themeColors.primary; // Selected background color
+                  }
+                  return AppTheme.themeColors.base; // Default background color
+                }),
+              ),
+            ),
+
+            child: child!,
+          ),
+        );
+      },
+    );
+  }
 
   Future<List<XFile>> _pickImageFile({required ImageSource source, bool multiple = false, bool compress = false}) async {
     List<XFile> files = <XFile>[];

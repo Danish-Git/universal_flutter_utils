@@ -1,5 +1,4 @@
-
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
@@ -37,9 +36,17 @@ class FilePickerController extends GetxController {
     contact.value = await UFUtils.picker.selectContacts() ?? "";
   }
 
-  void pickDate() {
+  Future<void> pickDate() async {
+    DateTime? selectedDate = await UFUtils.picker.selectDate();
+    if(selectedDate != null) {
+      date.value = UFUtils.formatDate(selectedDate) ?? "";
+    }
   }
 
-  void pickTime() {
+  Future<void> pickTime() async {
+    TimeOfDay? selectedTime = await UFUtils.picker.selectTime();
+    if(selectedTime != null) {
+      time.value = "${selectedTime.hour} : ${selectedTime.minute}";
+    }
   }
 }

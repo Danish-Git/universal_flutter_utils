@@ -1,4 +1,6 @@
+import 'package:example/widgets/list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 import 'avtar_samples.dart';
@@ -32,6 +34,8 @@ class WidgetsSamples extends StatelessWidget {
               TextButtonSamples(),
               ...divider(),
               AvtarSamples(),
+              ...divider(),
+              UFUButton(text: "List View Sample (With Pagination)", onPressed: () => Get.to(ListViewSample())),
               ...divider(),
             ],
           ),
