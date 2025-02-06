@@ -6,6 +6,7 @@ class RequestInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     // Check internet connection
+    String? token = await UFUtils.preferences.readAuthToken();
     bool isConnected = await _checkInternetConnection();
     if (!isConnected) {
       return handler.reject(
@@ -18,7 +19,8 @@ class RequestInterceptor extends Interceptor {
     }
 
     // Add headers
-    options.headers['Authorization'] = 'Bearer ${UFUtils.preferences.readAuthToken()}';
+    options.headers['Authorization'] = 'Bearer ${token ?? ""}';
+    options.headers['Content-Type'] = 'multipart/form-data';
     print('Request: ${options.method} ${options.path}');
     return handler.next(options);
   }

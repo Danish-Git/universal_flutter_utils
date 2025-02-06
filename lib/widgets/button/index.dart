@@ -82,7 +82,7 @@ class UFUButton extends StatelessWidget {
         return UFUTextSize.heading4;
       case UFUButtonSize.mediumWithIcon:
       case UFUButtonSize.extraSmall:
-        return UFUTextSize.heading6;
+        return (textSize != UFUTextSize.heading4) ? textSize ?? UFUTextSize.heading3 : UFUTextSize.heading3;
       case UFUButtonSize.datePickerButton:
       case UFUButtonSize.size24:
         return UFUTextSize.heading5;

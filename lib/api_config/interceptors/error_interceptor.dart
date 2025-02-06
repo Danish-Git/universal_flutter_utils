@@ -43,6 +43,7 @@ class ErrorInterceptor extends Interceptor {
             message = 'You are not authorized to access';
             break;
           default:
+            print(error.response?.data);
             message = 'Server error: HTTP $statusCode';
             break;
         }

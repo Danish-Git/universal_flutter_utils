@@ -33,9 +33,9 @@ class UFApiConfig {
   }
 
   // Unified POST request
-  Future<dynamic> post(String path, {dynamic data}) async {
+  Future<dynamic> post(String path, {Map<String, dynamic>? data}) async {
     try {
-      final response = await _dio.post(UFUtils.baseUrl + path, data: data);
+      final response = await _dio.post(UFUtils.baseUrl + path, data: FormData.fromMap(data ?? {}));
       return response.data;
     } catch (e) {
       rethrow;
