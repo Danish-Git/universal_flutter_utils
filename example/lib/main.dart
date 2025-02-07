@@ -23,7 +23,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     UFUtils.appName = "Universal Flutter Utils Demo";
-    UFUtils.baseUrl = "https://dummyjson.com/";
+    // UFUtils.baseUrl = "https://dummyjson.com/";
+    UFUtils.baseUrl = "http://aapkedukan.in:8000/api/v1/";
+    UFUtils.preferences.writeString(UFUtils.preferences.authToken, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdhNWExZDIxYWFhNDU2OTVhMTI0OWUxIiwicGhvbmVfbm8iOiIrOTExMTExMTExMTExIiwiaXNfdmVyaWZpZWQiOmZhbHNlfQ.k7XBFdPZx7KFVoVbErKLMBrHVJKDoX_QoB7Hi6sLw0I");
     AppTheme.setThemeColors(
       primary: Color(0xff9381ff),
       secondary: Color(0xffb8b8ff),

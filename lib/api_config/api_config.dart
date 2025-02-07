@@ -43,25 +43,27 @@ class UFApiConfig {
   }
 
   // Upload file method
-  Future<Response> uploadFile({required String path, required File file, Map<String, dynamic>? data,}) async {
+  Future<Map<String, dynamic>?> uploadFile({required String path, required File file, required String fileParam, Map<String, dynamic>? data,}) async {
     try {
       String fileName = file.path.split('/').last;
 
       // Create FormData with the file
       FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(
-          file.path,
-          filename: fileName,
-        ),
+        fileParam: await MultipartFile.fromFile(file.path, filename: fileName),
         if (data != null) ...data, // Add any additional data if needed
       });
 
+      // String? token = await UFUtils.preferences.readAuthToken();
+
       // Send POST request with FormData
       Response response = await _dio.post(path, data: formData,
-        options: Options(headers: {"Content-Type": "multipart/form-data",}),
+        // options: Options(headers: {
+        //   'Authorization': 'Bearer ${token ?? ""}',
+        //   "Content-Type": "multipart/form-data",
+        // }),
       );
 
-      return response;
+      return response.data;
     } catch (e) {
       rethrow;
     }

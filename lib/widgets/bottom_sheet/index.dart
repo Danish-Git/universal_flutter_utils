@@ -64,7 +64,7 @@ class UFUPopUpBuilder extends StatelessWidget {
 /// but we don't have controller for managing our loading state
 /// a default controller will be provided with it and loading
 /// state can be toggled easily by [controller.toggleIsLoading()]
-Future<dynamic> showUFUBottomSheet({
+Future<dynamic> ShowUFUBottomSheet({
   required Widget Function(UFUBottomSheetController controller) child,
   bool isScrollControlled = false,
   bool ignoreSafeArea = true,

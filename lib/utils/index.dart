@@ -165,7 +165,7 @@ class UFUtils {
   // showUnsavedChangesConfirmation(): displays confirmation dialog
   static void showUnsavedChangesConfirmation({int? unsavedResourceId}) {
     UFUtils.hideKeyboard();
-    showUFUBottomSheet(
+    ShowUFUBottomSheet(
       child: (_) => UFUConfirmationDialog(
         title: 'unsaved_changes'.tr,
         subTitle: 'unsaved_changes_desc'.tr,

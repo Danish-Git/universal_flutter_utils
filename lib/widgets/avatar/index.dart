@@ -7,6 +7,8 @@ class UFUAvatar extends StatelessWidget {
     this.width,
     this.radius = 50.0,
     this.borderColor,
+    this.isDashedBorder,
+    this.dashLength,
     this.size,
     this.backgroundColor = UFUColor.transparent,
     this.child,
@@ -24,6 +26,12 @@ class UFUAvatar extends StatelessWidget {
 
   /// Defines borderColor [UFUColor.transparent] of avatar
   final Color? borderColor;
+
+  /// Defines if border is dashed border of avatar
+  final bool? isDashedBorder;
+
+  /// Defines the length of a dash for border of avatar
+  final double? dashLength;
 
   /// Defines borderWidth of avatar
   final double? borderWidth;
@@ -86,15 +94,14 @@ class UFUAvatar extends StatelessWidget {
       width: width ?? getSize(),
       height: height ?? getSize(),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-              size == UFUAvatarSize.extraLarge ? 100.0 : radius),
-          color: backgroundColor,
-          border: (borderColor != null)
-              ? Border.all(
-                  color: borderColor!,
-                  width: borderWidth ?? 0.0,
-                )
-              : null),
+        borderRadius: BorderRadius.circular(size == UFUAvatarSize.extraLarge ? 100.0 : radius),
+        color: backgroundColor,
+        border: (isDashedBorder ?? false)
+          ? UFUDashedBorder.fromBorderSide(dashLength: dashLength ?? 0, side: BorderSide(
+              color: borderColor ?? AppTheme.themeColors.primary, width: borderWidth ?? 0))
+          : (borderColor != null)
+            ? Border.all(color: borderColor!, width: borderWidth ?? 0.0,)
+            : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(
             (size == UFUAvatarSize.extraLarge) ? 100.0 : radius),

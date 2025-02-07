@@ -234,7 +234,7 @@ class UFFilePickerUtil {
   }
 
   Future<void> permissionDeniedDialogue() async {
-    await showUFUBottomSheet(child: (UFUBottomSheetController controller) => UFUConfirmationDialog(
+    await ShowUFUBottomSheet(child: (UFUBottomSheetController controller) => UFUConfirmationDialog(
       title: "Permission Denied",
       subTitle: "This action requires additional permissions. Please enable the necessary permissions in your device settings",
       type: UFUConfirmationDialogType.message,

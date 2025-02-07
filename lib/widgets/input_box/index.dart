@@ -418,7 +418,7 @@ class _UFUInputBoxState extends State<UFUInputBox> {
       ),
       color: widget.disabled
           ? AppTheme.themeColors.inverse.withValues(alpha:0.6)
-          : widget.fillColor,
+          : widget.fillColor ?? AppTheme.themeColors.base,
       child: TextFormField(
         textCapitalization: widget.textCapitalization,
         keyboardAppearance: MediaQuery.of(context).platformBrightness,
@@ -475,8 +475,7 @@ class _UFUInputBoxState extends State<UFUInputBox> {
             borderSide: BorderSide(color: AppTheme.themeColors.inverse, width: 1.5),
           ),
           filled: widget.disabled || widget.fillColor != null,
-          fillColor:
-          widget.disabled ? UFUColor.lightGray : widget.fillColor,
+          fillColor: widget.disabled ? UFUColor.lightGray : widget.fillColor ?? AppTheme.themeColors.base,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           enabledBorder: getInActiveBorder(),
           disabledBorder: getInActiveBorder(),
