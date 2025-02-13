@@ -5,7 +5,7 @@ class FormValidator {
       return 'Email is required';
     }
     if (value != null && value.isNotEmpty) {
-      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+\$');
+      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
       if (!emailRegex.hasMatch(value)) {
         return 'Enter a valid email';
       }
