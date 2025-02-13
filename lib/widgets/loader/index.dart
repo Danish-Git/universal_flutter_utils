@@ -41,6 +41,7 @@ class UFULoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UFUtils.isLoading = true;
     return CustomDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),

@@ -216,7 +216,13 @@ class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
           size: UFUButtonSize.small,
           disabled: widget.disableButtons,
           colorType: widget.prefixBtnColorType ?? UFUButtonColorType.lightGray,
-          onPressed: widget.onTapPrefix ?? () => Navigator.pop(context),
+          onPressed: widget.onTapPrefix ?? () {
+            if(UFUtils.isLoading) {
+              UFUtils.isLoading = false;
+              Navigator.pop(context);
+            }
+            Navigator.pop(context);
+          },
         ),
       ],
     );

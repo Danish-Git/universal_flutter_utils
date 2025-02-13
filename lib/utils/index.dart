@@ -27,6 +27,8 @@ class UFUtils {
   static String baseUrl = UFUAppConfig.baseUrl;
   static String socketBaseUrl = UFUAppConfig.socketBaseUrl;
 
+  static bool isLoading = false;
+
   ///   Form Validations
   static String? emailValidator(String? value, {bool isRequired = true}) => FormValidator.emailValidator(value, isRequired: isRequired);
   static String? passwordValidator(String? value, {bool isRequired = true}) => FormValidator.passwordValidator(value, isRequired: isRequired);
