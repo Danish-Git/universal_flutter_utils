@@ -4,7 +4,7 @@ import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 class UFUConfirmationDialog extends StatefulWidget {
 
   const UFUConfirmationDialog({
-    Key? key,
+    super.key,
     required this.title,
     this.subTitle,
     this.prefixBtnText = 'Cancel',
@@ -18,8 +18,7 @@ class UFUConfirmationDialog extends StatefulWidget {
     this.content,
     this.prefixBtnColorType,
     this.onTapIcon,
-    })
-      : super(key: key);
+    });
 
   /// It can be used to set title of the dialog, this is required
   final String? title;
@@ -217,10 +216,7 @@ class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
           size: UFUButtonSize.small,
           disabled: widget.disableButtons,
           colorType: widget.prefixBtnColorType ?? UFUButtonColorType.lightGray,
-          onPressed: widget.onTapPrefix ??
-              () {
-                Navigator.pop(context);
-              },
+          onPressed: widget.onTapPrefix ?? () => Navigator.pop(context),
         ),
       ],
     );

@@ -41,6 +41,7 @@ class ErrorInterceptor extends Interceptor {
           case 401:
             title = 'Unauthrizer Access';
             message = 'You are not authorized to access';
+            showRetry = false;
             break;
           default:
             print(error.response?.data);
@@ -61,12 +62,16 @@ class ErrorInterceptor extends Interceptor {
       UFUConfirmationDialog(
         title: title,
         subTitle: message,
-        type: error.type == DioExceptionType.connectionError ? UFUConfirmationDialogType.alert : UFUConfirmationDialogType.message,
+        type: showRetry ? UFUConfirmationDialogType.message : UFUConfirmationDialogType.alert,
         suffixBtnText: "Retry",
         onTapSuffix: () {
           Get.back();
           retryCallback();
         },
+        onTapPrefix: error.response?.statusCode == 401 ? () async {
+          await UFUtils.preferences.clearPref();
+          Get.back();
+        } : null,
       ),
       // _buildErrorBottomSheet(title, message, showRetry, retryCallback),
       backgroundColor: AppTheme.themeColors.base,
