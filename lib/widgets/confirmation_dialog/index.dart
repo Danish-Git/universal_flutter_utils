@@ -1,5 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
+
+ShowUFUConfirmationDialog({required String? title, String? subTitle,
+  String? prefixBtnText = 'Cancel', String? suffixBtnText = 'Confirm', VoidCallback? onTapPrefix,
+  VoidCallback? onTapSuffix, IconData? icon, UFUConfirmationDialogType? type = UFUConfirmationDialogType.message,
+  bool disableButtons = false, Widget? suffixBtnIcon, Widget? content,
+  UFUButtonColorType? prefixBtnColorType, VoidCallback? onTapIcon,}) async {
+  await Get.bottomSheet(
+    UFUConfirmationDialog(
+      title: title,
+      subTitle: subTitle,
+      prefixBtnText: prefixBtnText,
+      suffixBtnText: suffixBtnText,
+      onTapPrefix: onTapPrefix,
+      onTapSuffix: onTapSuffix,
+      icon: icon,
+      type: type ?? UFUConfirmationDialogType.message,
+      disableButtons: disableButtons,
+      suffixBtnIcon: suffixBtnIcon,
+      content: content,
+      prefixBtnColorType: prefixBtnColorType,
+      onTapIcon: onTapIcon
+    ),
+    // _buildErrorBottomSheet(title, message, showRetry, retryCallback),
+    backgroundColor: AppTheme.themeColors.base,
+    isScrollControlled: true,
+    // shape: const RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    // ),
+  );
+}
 
 class UFUConfirmationDialog extends StatefulWidget {
 
