@@ -64,3 +64,4 @@ export 'thumb/thumb_size.dart';
 export 'thumb/type.dart';
 export 'dashed_border/index.dart';
 export 'image_picker/index.dart';
+export 'shimmer/index.dart';
