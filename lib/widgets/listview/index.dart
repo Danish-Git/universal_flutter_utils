@@ -79,8 +79,8 @@ class _UFUListViewState extends State<UFUListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: widget.onRefresh != null ?  RefreshIndicator(
+    return /*Flexible(
+      child: */widget.onRefresh != null ?  RefreshIndicator(
         onRefresh: () async {
           if(isLoadingMore) return;
           toggleIsRefreshing();
@@ -93,8 +93,8 @@ class _UFUListViewState extends State<UFUListView> {
               : !(widget.disableOnRefresh ?? false);
         },
         child: getListView()
-      ) : getListView()
-    );
+      ) : getListView();
+    // );
   }
 
   Widget getListView() {
