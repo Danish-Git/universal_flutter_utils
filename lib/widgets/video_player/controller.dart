@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 import 'package:video_player/video_player.dart';
 
 class UFUVideoPlayerController extends GetxController {
@@ -21,17 +22,24 @@ class UFUVideoPlayerController extends GetxController {
 
   Future<void> initializePlayer() async {
     if (videoUrl?.isNotEmpty ?? false) {
-      videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl ?? ""));
+      try {
+        videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(videoUrl ?? ""));
 
-      await videoPlayerController.initialize();
-      chewieController = ChewieController(
-        videoPlayerController: videoPlayerController,
-        autoPlay: true,
-        looping: true,
-        fullScreenByDefault: true,
-        allowFullScreen: false,
-      );
-      update();
+        await videoPlayerController.initialize();
+        chewieController = ChewieController(
+          videoPlayerController: videoPlayerController,
+          autoPlay: true,
+          looping: true,
+          fullScreenByDefault: true,
+          allowFullScreen: false,
+        );
+        update();
+      } catch (e) {
+        Get.back();
+        await Future.delayed(Duration(seconds: 2));
+        UFUToast.showToast("Unable to load video");
+      }
+
     }
   }
 
