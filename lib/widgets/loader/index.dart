@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
 ShowUFULoader({String? msg}) {
+  if(UFUtils.isLoaderVisible()) return;
+
   Get.generalDialog(
     barrierDismissible: false,
     barrierLabel: '',
@@ -13,6 +15,7 @@ ShowUFULoader({String? msg}) {
     },
     pageBuilder: (_animation, _secondaryAnimation, _child) {
       return UFULoader(
+        key: UFUtils.ufuLoaderKey,
         text: msg,
       );
     },
@@ -32,16 +35,15 @@ Widget? showUFUConfirmationLoader({bool? show = false, double size = 20}){
 
 class UFULoader extends StatelessWidget {
   const UFULoader({
-    Key? key,
+    super.key,
     this.text,
-  }) : super(key: key);
+  });
 
   /// It is used to set loader text
   final String? text;
 
   @override
   Widget build(BuildContext context) {
-    UFUtils.isLoading = true;
     return CustomDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),

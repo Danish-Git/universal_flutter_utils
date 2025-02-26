@@ -24,6 +24,10 @@ class UFUListView extends StatefulWidget {
 
   final bool doAddFloatingButtonMargin;
 
+  final bool isGridView;
+
+  final SliverGridDelegate? gridDelegate;
+
   const UFUListView({
     super.key,
     required this.listCount,
@@ -36,7 +40,9 @@ class UFUListView extends StatefulWidget {
     this.physics,
     this.scrollController,
     this.shrinkWrap = true,
-    this.doAddFloatingButtonMargin = false
+    this.doAddFloatingButtonMargin = false,
+    this.isGridView = false,
+    this.gridDelegate,
   });
 
   @override
@@ -92,8 +98,8 @@ class _UFUListViewState extends State<UFUListView> {
               ? false
               : !(widget.disableOnRefresh ?? false);
         },
-        child: getListView()
-      ) : getListView();
+        child: widget.isGridView ? getGridView() : getListView()
+      ) : widget.isGridView ? getGridView() : getListView();
     // );
   }
 
@@ -102,6 +108,28 @@ class _UFUListViewState extends State<UFUListView> {
       context: context,
       removeTop: true,
       child: ListView.builder(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: getListPadding(),
+        controller: infiniteScrollController,
+        scrollDirection: widget.scrollDirection,
+        itemCount: widget.listCount + 1,
+        itemBuilder: widget.itemBuilder,
+        physics: widget.physics,
+        shrinkWrap: widget.shrinkWrap,
+      ),
+    );
+  }
+
+  Widget getGridView() {
+    return MediaQuery.removeViewPadding(
+      context: context,
+      removeTop: true,
+      child: GridView.builder(
+        gridDelegate: widget.gridDelegate ?? const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns
+          crossAxisSpacing: 10, // Spacing between columns
+          mainAxisSpacing: 10, // Spacing between rows
+        ),
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: getListPadding(),
         controller: infiniteScrollController,

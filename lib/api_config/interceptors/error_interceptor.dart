@@ -21,7 +21,7 @@ class ErrorInterceptor extends Interceptor {
     });
   }
 
-  void _handleError(DioException error, VoidCallback retryCallback) {
+  Future<void> _handleError(DioException error, VoidCallback retryCallback) async {
     String title = 'An Error Occurred';
     String message = 'Something went wrong. Please try again.';
     bool showRetry = false;
@@ -58,28 +58,48 @@ class ErrorInterceptor extends Interceptor {
     }
 
     // Display error using Get.bottomSheet
-    Get.bottomSheet(
-      UFUConfirmationDialog(
-        title: title,
-        subTitle: message,
-        type: showRetry ? UFUConfirmationDialogType.message : UFUConfirmationDialogType.alert,
-        suffixBtnText: "Retry",
-        onTapSuffix: () {
-          Get.back();
-          retryCallback();
-        },
-        onTapPrefix: error.response?.statusCode == 401 ? () async {
-          await UFUtils.preferences.clearPref();
-          Get.back();
-        } : null,
-      ),
-      // _buildErrorBottomSheet(title, message, showRetry, retryCallback),
-      backgroundColor: AppTheme.themeColors.base,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
+    await ShowUFUConfirmationDialog(
+      title: title,
+      subTitle: message,
+      suffixBtnText: "Retry",
+      onTapSuffix: () {
+        Get.back();
+        retryCallback();
+      },
+      onTapPrefix: error.response?.statusCode == 401 ? () async {
+        await UFUtils.preferences.clearPref();
+        Get.back();
+      } : null,
     );
+
+    if(UFUtils.isLoaderVisible()) {
+      Get.back();
+    }
+
+
+    // Get.bottomSheet(
+    //   UFUConfirmationDialog(
+    //     title: title,
+    //     subTitle: message,
+    //     type: showRetry ? UFUConfirmationDialogType.message : UFUConfirmationDialogType.alert,
+    //     suffixBtnText: "Retry",
+    //     onTapSuffix: () {
+    //       Get.back();
+    //       retryCallback();
+    //     },
+    //     onTapPrefix: error.response?.statusCode == 401 ? () async {
+    //       await UFUtils.preferences.clearPref();
+    //       Get.back();
+    //     } : null,
+    //
+    //   ),
+    //   // _buildErrorBottomSheet(title, message, showRetry, retryCallback),
+    //   backgroundColor: AppTheme.themeColors.base,
+    //   isScrollControlled: true,
+    //   shape: const RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    //   ),
+    // );
   }
 
   Future<dynamic> _retryRequest(RequestOptions requestOptions) async {

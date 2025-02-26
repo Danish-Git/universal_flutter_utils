@@ -92,10 +92,10 @@ class UFUConfirmationDialog extends StatefulWidget {
   final VoidCallback? onTapIcon;
 
   @override
-  State<UFUConfirmationDialog> createState() => _UFUConfirmationDialogState();
+  UFUConfirmationDialogState createState() => UFUConfirmationDialogState();
 }
 
-class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
+class UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -248,10 +248,6 @@ class _UFUConfirmationDialogState extends State<UFUConfirmationDialog> {
           disabled: widget.disableButtons,
           colorType: widget.prefixBtnColorType ?? UFUButtonColorType.lightGray,
           onPressed: widget.onTapPrefix ?? () {
-            if(UFUtils.isLoading) {
-              UFUtils.isLoading = false;
-              Navigator.pop(context);
-            }
             Navigator.pop(context);
           },
         ),

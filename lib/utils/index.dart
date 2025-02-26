@@ -27,7 +27,7 @@ class UFUtils {
   static String baseUrl = UFUAppConfig.baseUrl;
   static String socketBaseUrl = UFUAppConfig.socketBaseUrl;
 
-  static bool isLoading = false;
+  static GlobalKey<UFUConfirmationDialogState> ufuLoaderKey = GlobalKey<UFUConfirmationDialogState>();
 
   ///   Form Validations
   static String? emailValidator(String? value, {bool isRequired = true}) => FormValidator.emailValidator(value, isRequired: isRequired);
@@ -65,6 +65,8 @@ class UFUtils {
 
   ///   All common methods can be accessed using [commonMethods] object
   static UFUCommonMethods commonMethods = UFUCommonMethods();
+
+  static bool isLoaderVisible() => ufuLoaderKey.currentContext != null;
 
   //Add additional arguments to existing arguments
   static void addArguments(Map<String,int> args){

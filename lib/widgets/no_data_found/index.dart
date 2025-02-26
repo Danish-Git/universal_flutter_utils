@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universal_flutter_utils/universal_flutter_utils.dart';
 
-class NoDataFound extends StatelessWidget {
+class UFUNoDataFound extends StatelessWidget {
   final String? title;
   final String? descriptions;
   final IconData? icon;
@@ -10,7 +10,7 @@ class NoDataFound extends StatelessWidget {
   final Color? textColor;
   final UFUTextSize? textSize;
 
-  const NoDataFound({
+  const UFUNoDataFound({
     this.title,
     this.descriptions,
     this.icon,
